@@ -1,45 +1,35 @@
-let users = {
-    "admin": { password: "admin123", role: "admin" },
-    "user1": { password: "user123", role: "user" },
-    "user2": { password: "pass456", role: "user" }
-};
+let password="Riwi2025*"
+let try_User=3;
+let try_Admin=1;
+let blocked=false;
 
-let attempts = {};
-let maxAttempts = 3;
+while(!blocked){
+    let user=prompt("Enter the user: ");
+    let pass=prompt("Enter the password");
 
-while (true) {
-    let username = prompt("Enter your username:");
-
-    if (!username) {
-        alert("Login cancelled.");
-        break;
-    }
-
-    let password = prompt("Enter your password:");
-
-    if (!attempts[username]) {
-        attempts[username] = 0;
-    }
-
-    // Check if user exists
-    if (users[username]) {
-        let isAdmin = users[username].role === "admin";
-        let allowedAttempts = isAdmin ? maxAttempts + 1 : maxAttempts;
-
-        if (attempts[username] >= allowedAttempts) {
-            alert("Access blocked. Too many failed attempts.");
+    if (user.toLowerCase()==="santiago"){
+        if(pass===password){
+            alert("Correct password");
             break;
+        }else{
+            try_User--;
+            console.error("Incorrect password "+try_User);
+            if (try_User===0){
+                document.write("Blocked page")
+                blocked=true;
+            }
         }
-
-        if (password === users[username].password) {
-            alert("Access granted. Welcome, " + username + "!");
+    }else if(user.toLowerCase()==="admin"){
+        if(pass===password){
+            alert("Correct password");
             break;
-        } else {
-            attempts[username]++;
-            alert(`Incorrect password. Attempt ${attempts[username]} of ${allowedAttempts}.`);
+        }else{
+            console.error("Incorrect password, no more try...");
+                document.write("Blocked page");{
+                blocked=true;
+            }
         }
-    } else {
-        alert("User not found.");
+    }else{
+        console.error("Unknown user")
     }
 }
-
